@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../../common/NavBar";
 import { Grid, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import AddAppointmentDialog from "../widgets/AddAppointmentDialog";
+import CheckStatusDialog from "../widgets/CheckStatusDialog";
 
 const Home = () => {
   const theme1 = createTheme({
@@ -11,7 +13,33 @@ const Home = () => {
       },
     },
   });
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [statusDialogOpen, setstatusDialogOpen] = useState(false);
 
+  //open appointment dialog
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  //open status dialog
+  const handleOpenStatusDialog = () => {
+    setstatusDialogOpen(true);
+  };
+
+  //close appointment dialog
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
+  //close status dialog
+  const handleCloseStatusDialog = () => {
+    setstatusDialogOpen(false);
+  };
+
+  useEffect(() => {
+    handleOpenDialog();
+    // setDialogOpen(true);
+  }, []);
   return (
     <div className="landing-page">
       <NavBar />
@@ -27,6 +55,7 @@ const Home = () => {
                 variant="contained"
                 color="secondary"
                 className="open-appointments"
+                onClick={handleOpenDialog}
               >
                 Reserve your Time Now!
               </Button>
@@ -37,13 +66,22 @@ const Home = () => {
               Many immersive & interactive experience.
             </p> */}
             <ThemeProvider theme={theme1}>
-              <Button variant="outlined" color="secondary">
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleOpenStatusDialog}
+              >
                 Check Your Reservation!
               </Button>
             </ThemeProvider>
           </Grid>
         </Grid>
       </header>
+      <AddAppointmentDialog open={dialogOpen} onClose={handleCloseDialog} />
+      <CheckStatusDialog
+        open={statusDialogOpen}
+        onClose={handleCloseStatusDialog}
+      />
     </div>
   );
 };
