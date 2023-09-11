@@ -4,6 +4,9 @@ import { Grid, Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddAppointmentDialog from "../widgets/AddAppointmentDialog";
 import CheckStatusDialog from "../widgets/CheckStatusDialog";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "../../../utils/db";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const theme1 = createTheme({
@@ -15,6 +18,8 @@ const Home = () => {
   });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [statusDialogOpen, setstatusDialogOpen] = useState(false);
+  const [user] = useAuthState(auth);
+  const navigate = useNavigate();
 
   //open appointment dialog
   const handleOpenDialog = () => {
@@ -37,9 +42,10 @@ const Home = () => {
   };
 
   useEffect(() => {
+    if (!user) navigate("/");
     handleOpenDialog();
     // setDialogOpen(true);
-  }, []);
+  }, [user]);
   return (
     <div className="landing-page">
       <NavBar />

@@ -339,9 +339,9 @@ const AddAppointmentDialog = (props) => {
                   onBlur={formik.handleBlur}
                   color="warning"
                 >
-                  <MenuItem value="Morning">Morning</MenuItem>
-                  <MenuItem value="Afternoon">Afternoon</MenuItem>
-                  <MenuItem value="Evening">Evening</MenuItem>
+                  <MenuItem value="morning">Morning</MenuItem>
+                  <MenuItem value="afternoon">Afternoon</MenuItem>
+                  <MenuItem value="evening">Evening</MenuItem>
                 </Select>
                 {formik.errors.ScheduleTime && formik.touched.ScheduleTime && (
                   <div style={{ color: "red" }}>

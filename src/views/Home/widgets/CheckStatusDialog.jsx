@@ -20,10 +20,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Form } from "react-bootstrap";
 import { v4 } from "uuid";
 import { toast } from "react-toastify";
+import { mt } from "date-fns/locale";
 
 const CheckStatusDialog = (props) => {
   const { open, onClose } = props;
-  const [menuData, setMenuData] = useState([]);
+  const [appointmentData, setAppointmentData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [nic, setNic] = useState("");
 
@@ -89,7 +90,7 @@ const CheckStatusDialog = (props) => {
         id: v4(), // Generate a unique ID for each row
       }));
 
-      setMenuData(data);
+      setAppointmentData(data);
       setIsLoading(false);
     } catch (error) {
       console.log(error);
@@ -171,7 +172,7 @@ const CheckStatusDialog = (props) => {
                   style={{
                     height: "350px",
                   }}
-                  rows={menuData}
+                  rows={appointmentData}
                   columns={columns}
                   pageSize={5}
                   rowHeight={90}
@@ -185,7 +186,7 @@ const CheckStatusDialog = (props) => {
           <DialogActions sx={{ mt: -12 }}>
             <Button
               onClick={() => {
-                setMenuData([]);
+                setAppointmentData([]);
                 onClose();
               }}
               color="warning"

@@ -25,10 +25,15 @@ export const db = getFirestore(app);
 //sign in with username and pwd using firebase
 export const logInWithEmailAndPassword = async (email, password) => {
   try {
-    await signInWithEmailAndPassword(auth, email, password);
+    const res = await signInWithEmailAndPassword(auth, email, password);
+    // if(res.user != null){
+    //   return true;
+    // }
     toast.success("Login successfully!", {
       position: "bottom-right",
     });
+    return true;
+    // window.location.reload();
   } catch (err) {
     console.error(err);
     // alert(err.message);
